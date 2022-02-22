@@ -1,20 +1,14 @@
-name: Whatsapp Bot
+name: Node.js CI
 
-# 'on' is the trigger, in this case this Action will
-# be triggered using cron set at a 10 minutes interval.
 on:
   push:
     branches: [ master ]
-
-# 'jobs' are the routines, we only have
-# one when the instance is built.
+    
 jobs:
-  build:
-    # Our instance will use the latest available version of Ubuntu.
+  build-and-test:
     runs-on: ubuntu-latest
 
-    # These steps are run in the same order as are defined.
-        strategy:
+    strategy:
       matrix:
         node-version: [16.x]
 
@@ -26,5 +20,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm i
-    - run: npm run build
     - run: npm start
